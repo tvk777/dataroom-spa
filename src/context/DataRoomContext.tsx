@@ -9,6 +9,8 @@ interface DataRoomContextType {
   currentFolders: Folder[];
   currentFiles: FileItem[];
 
+  breadcrumbs: Folder[];
+
   navigateToFolder: (folderId: string | null) => void;
 
   createFolder: (name: string) => void;
