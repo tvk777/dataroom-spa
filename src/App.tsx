@@ -1,26 +1,32 @@
 import { useDataRoom } from '@/context/DataRoomContext';
 import { FolderCard } from '@/components/folders/FolderCard';
 import { CreateFolderDialog } from '@/components/folders/CreateFolderDialog';
-import { Breadcrumbs } from './components/layout/Breadcrumbs';
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
+import { UploadFileButton } from '@/components/files/UploadFileButton';
+import { FileCard } from '@/components/files/FileCard';
+import { openFile } from './lib/file-utils';
 
 function App() {
-  const { currentFolders, navigateToFolder } = useDataRoom();
+  const { currentFolders, currentFiles, navigateToFolder } = useDataRoom();
 
   return (
     <div className='min-h-screen bg-slate-50 p-8'>
       <div className='mx-auto max-w-6xl'>
         <div className='mb-8 flex items-center justify-between'>
           <h1 className='text-3xl font-bold'>Acme Data Room</h1>
-
-          <CreateFolderDialog />
+          <div className='flex gap-3'>
+            <CreateFolderDialog />
+            <UploadFileButton />
+          </div>
         </div>
 
         <Breadcrumbs />
 
-        {currentFolders.length === 0 ? (
+        {currentFolders.length === 0 && currentFiles.length === 0 ? (
           <div className='rounded-xl border border-dashed bg-white py-20 text-center'>
-            <p className='text-lg font-medium'>No folders yet</p>
-            <p className='text-slate-500'>Create your first folder</p>
+            <p className='text-lg font-medium'>Empty Data Room</p>
+
+            <p className='text-slate-500'>Upload files or create folders</p>
           </div>
         ) : (
           <div className='grid gap-4 md:grid-cols-3 lg:grid-cols-4'>
@@ -31,6 +37,10 @@ function App() {
                 name={folder.name}
                 onClick={() => navigateToFolder(folder.id)}
               />
+            ))}
+
+            {currentFiles.map((file) => (
+              <FileCard key={file.id} file={file} onClick={() => openFile(file.base64)} />
             ))}
           </div>
         )}

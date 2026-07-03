@@ -9,7 +9,7 @@ export interface FileItem {
   id: string;
   name: string;
   folderId: string | null;
-  data: string; // base64 pdf
+  base64: string;
   size: number;
   createdAt: string;
 }

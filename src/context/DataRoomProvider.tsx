@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from 'react';
 import { DataRoomContext } from './DataRoomContext';
 import type { FileItem, Folder } from '@/types/dataroom';
 import { getBreadcrumbs, getDescendantFolderIds } from '@/lib/folder-utils';
+import { convertFileToBase64 } from '@/lib/file-utils';
 
 interface DataRoomProviderProps {
   children: ReactNode;
@@ -9,7 +10,7 @@ interface DataRoomProviderProps {
 
 export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
   const [folders, setFolders] = useState<Folder[]>([]);
-  const [files /* setFiles */] = useState<FileItem[]>([]);
+  const [files, setFiles] = useState<FileItem[]>([]);
   const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
 
   const currentFolders = useMemo(
@@ -62,8 +63,21 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
       return prev.filter((folder) => !idsToDelete.includes(folder.id));
     });
   };
+console.log(files);
+  const uploadFile = async (file: File) => {
+    const base64 = await convertFileToBase64(file);
 
-  const uploadFile = () => {};
+    const newFile: FileItem = {
+      id: crypto.randomUUID(),
+      name: file.name,
+      folderId: currentFolderId,
+      base64,
+      size: file.size,
+      createdAt: new Date().toISOString(),
+    };
+
+    setFiles((prev) => [...prev, newFile]);
+  };
   const renameFile = () => {};
   const deleteFile = () => {};
 
