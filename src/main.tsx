@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './App.tsx';
+import { DataRoomProvider } from './context/DataRoomProvider.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <DataRoomProvider>
+      <App />
+    </DataRoomProvider>
   </StrictMode>,
-)
+);
