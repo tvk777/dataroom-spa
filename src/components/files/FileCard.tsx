@@ -1,4 +1,5 @@
 import type { FileItem } from '@/types/dataroom';
+import { FileActions } from './FileActions';
 
 interface FileCardProps {
   file: FileItem;
@@ -7,33 +8,23 @@ interface FileCardProps {
 
 export const FileCard = ({ file, onClick }: FileCardProps) => {
   return (
-    <div
-      onClick={onClick}
-      className='group relative cursor-pointer rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md'
-    >
-      <div className='mb-2 text-3xl'>📄</div>
+    <div className='rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md'>
+      <div className='flex items-start justify-between gap-4'>
+        <div onClick={onClick} className='flex-1 min-w-0 cursor-pointer group'>
+          <div className='mb-2 text-3xl transition-transform group-hover:scale-105'>📄</div>
 
-      <p title={file.name} className='truncate font-medium text-slate-800'>
-        {file.name}
-      </p>
+          <p title={file.name} className='truncate font-medium text-slate-800'>
+            {file.name}
+          </p>
 
-      <p className='mt-2 text-sm text-slate-500'>{(file.size / 1024).toFixed(1)} KB</p>
+          <p className='mt-2 text-sm text-slate-500'>{(file.file.size / 1024).toFixed(1)} KB</p>
 
-      <div
-        className='
-      pointer-events-none
-      absolute inset-0
-      flex items-center justify-center
-      rounded-xl
-      bg-slate-900/35 
-      backdrop-blur-[1px]
-      opacity-0
-      transition-opacity
-      duration-200
-      group-hover:opacity-100
-    '
-      >
-        <span className='text-sm font-medium text-white'>Click to preview</span>
+          <p className='text-xs text-slate-400 opacity-0 transition-opacity group-hover:opacity-100'>
+            Click to preview
+          </p>
+        </div>
+
+        <FileActions id={file.id} name={file.name} />
       </div>
     </div>
   );

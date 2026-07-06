@@ -40,7 +40,7 @@ function App() {
             ))}
 
             {currentFiles.map((file) => (
-              <FileCard key={file.id} file={file} onClick={() => openFile(file.base64)} />
+              <FileCard key={file.id} file={file} onClick={() => openFile(file.file)} />
             ))}
           </div>
         )}

@@ -17,7 +17,7 @@ interface DataRoomContextType {
   renameFolder: (id: string, newName: string) => void;
   deleteFolder: (id: string) => void;
 
-  uploadFile: (file: File) => Promise<void>;
+  uploadFile: (file: File) => void;
   renameFile: (id: string, newName: string) => void;
   deleteFile: (id: string) => void;
 }

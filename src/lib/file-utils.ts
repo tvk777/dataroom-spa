@@ -1,19 +1,5 @@
-export const convertFileToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+export const openFile = (file: File) => {
+  const url = URL.createObjectURL(file);
 
-    reader.readAsDataURL(file);
-
-    reader.onload = () => {
-      resolve(reader.result as string);
-    };
-
-    reader.onerror = (error) => {
-      reject(error);
-    };
-  });
-};
-
-export const openFile = (base64: string) => {
-  window.open(base64, '_blank');
+  window.open(url, '_blank', 'noopener,noreferrer');
 };
