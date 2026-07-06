@@ -1,8 +1,9 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { DataRoomContext } from './DataRoomContext';
 import type { FileItem, Folder } from '@/types/dataroom';
 import { getBreadcrumbs, getDescendantFolderIds } from '@/lib/folder-utils';
 import { isFileNameDuplicate, isFolderNameDuplicate } from '@/lib/validation';
+import { loadFiles, loadFolders, saveFiles, saveFolders } from '@/services/storage';
 
 interface DataRoomProviderProps {
   children: ReactNode;
@@ -12,6 +13,32 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [files, setFiles] = useState<FileItem[]>([]);
   const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const [storedFolders, storedFiles] = await Promise.all([loadFolders(), loadFiles()]);
+
+      setFolders(storedFolders);
+      setFiles(storedFiles);
+
+      setIsDataLoaded(true);
+    };
+
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    if (!isDataLoaded) return;
+
+    saveFolders(folders);
+  }, [folders, isDataLoaded]);
+
+  useEffect(() => {
+    if (!isDataLoaded) return;
+
+    saveFiles(files);
+  }, [files, isDataLoaded]);
 
   const currentFolders = useMemo(
     () => folders.filter((folder) => folder.parentId === currentFolderId),
