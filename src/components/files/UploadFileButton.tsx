@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { useDataRoom } from '@/context/DataRoomContext';
@@ -37,7 +38,10 @@ export const UploadFileButton = () => {
 
   return (
     <>
-      <Button onClick={handleButtonClick}>Upload PDF</Button>
+      <Button onClick={handleButtonClick} className='gap-2'>
+        <Upload className='h-4 w-4' />
+        Upload PDF
+      </Button>
 
       <input ref={inputRef} type='file' accept='.pdf,application/pdf' className='hidden' onChange={handleFileChange} />
     </>

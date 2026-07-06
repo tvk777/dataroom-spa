@@ -1,3 +1,4 @@
+import { FolderOpen } from 'lucide-react';
 import { useDataRoom } from '@/context/DataRoomContext';
 import { FolderCard } from '@/components/folders/FolderCard';
 import { CreateFolderDialog } from '@/components/folders/CreateFolderDialog';
@@ -13,10 +14,14 @@ function App() {
     <div className='min-h-screen bg-slate-50 p-8'>
       <div className='mx-auto max-w-6xl'>
         <div className='mb-8 flex items-center justify-between'>
-          <h1 className='text-3xl font-bold'>Acme Data Room</h1>
+          <div className='flex items-center gap-3'>
+            <FolderOpen className='h-8 w-8 text-blue-600' />
+
+            <h1 className='text-3xl font-bold'>Acme Data Room</h1>
+          </div>
           <div className='flex gap-3'>
-            <CreateFolderDialog />
             <UploadFileButton />
+            <CreateFolderDialog />
           </div>
         </div>
 
@@ -31,11 +36,7 @@ function App() {
         ) : (
           <div className='grid gap-4 md:grid-cols-3 lg:grid-cols-4'>
             {currentFolders.map((folder) => (
-              <FolderCard
-                key={folder.id}
-                folder={folder}
-                onClick={() => navigateToFolder(folder.id)}
-              />
+              <FolderCard key={folder.id} folder={folder} onClick={() => navigateToFolder(folder.id)} />
             ))}
 
             {currentFiles.map((file) => (

@@ -1,18 +1,15 @@
 import { useState } from 'react';
+import { MoreVertical, Pencil, Trash2 } from 'lucide-react';
 import { useDataRoom } from '@/context/DataRoomContext';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -63,7 +60,7 @@ export const FolderActions = ({ folder }: FolderActionsProps) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant='ghost' size='sm'>
-            ⋮
+            <MoreVertical className='h-4 w-4' />
           </Button>
         </DropdownMenuTrigger>
 
@@ -74,6 +71,7 @@ export const FolderActions = ({ folder }: FolderActionsProps) => {
               setIsRenameOpen(true);
             }}
           >
+            <Pencil className='mr-2 h-4 w-4' />
             Rename
           </DropdownMenuItem>
 
@@ -84,6 +82,7 @@ export const FolderActions = ({ folder }: FolderActionsProps) => {
               setIsDeleteOpen(true);
             }}
           >
+            <Trash2 className='mr-2 h-4 w-4' />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

@@ -1,3 +1,4 @@
+import { FileText } from 'lucide-react';
 import type { FileItem } from '@/types/dataroom';
 import { FileActions } from './FileActions';
 
@@ -11,7 +12,9 @@ export const FileCard = ({ file, onClick }: FileCardProps) => {
     <div className='rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md'>
       <div className='flex items-start justify-between gap-4'>
         <div onClick={onClick} className='flex-1 min-w-0 cursor-pointer group'>
-          <div className='mb-2 text-3xl transition-transform group-hover:scale-105'>📄</div>
+          <div className='mb-2 text-3xl transition-transform group-hover:scale-105'>
+            <FileText className='h-6 w-6 text-red-500' />
+          </div>
 
           <p title={file.name} className='truncate font-medium text-slate-800'>
             {file.name}

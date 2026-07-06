@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FolderPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -21,7 +22,10 @@ export const CreateFolderDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>+ New Folder</Button>
+        <Button className='gap-2'>
+          <FolderPlus className='h-4 w-4' />
+          New Folder
+        </Button>
       </DialogTrigger>
 
       <DialogContent>
