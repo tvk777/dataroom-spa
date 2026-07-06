@@ -6,12 +6,17 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { UploadFileButton } from '@/components/files/UploadFileButton';
 import { FileCard } from '@/components/files/FileCard';
 import { openFile } from './lib/file-utils';
+import { LoadingScreen } from './components/layout/LoadingScreen';
 
 function App() {
-  const { currentFolders, currentFiles, navigateToFolder } = useDataRoom();
+  const { currentFolders, currentFiles, navigateToFolder, isDataLoaded } = useDataRoom();
+
+  if (!isDataLoaded) {
+    return <LoadingScreen />;
+  }
 
   return (
-    <div className='min-h-screen bg-slate-50 p-8'>
+    <div className='min-h-screen bg-slate-50 p-8'>      
       <div className='mx-auto max-w-6xl'>
         <div className='mb-8 flex items-center justify-between'>
           <div className='flex items-center gap-3'>

@@ -166,6 +166,8 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
         uploadFile,
         renameFile,
         deleteFile,
+
+        isDataLoaded,
       }}
     >
       {children}

@@ -20,6 +20,8 @@ interface DataRoomContextType {
   uploadFile: (file: File) => boolean;
   renameFile: (id: string, newName: string) => void;
   deleteFile: (id: string) => void;
+
+  isDataLoaded: boolean;
 }
 
 export const DataRoomContext = createContext<DataRoomContextType | null>(null);
