@@ -24,7 +24,7 @@ export const FileCard = ({ file, onClick }: FileCardProps) => {
           </p>
         </div>
 
-        <FileActions id={file.id} name={file.name} />
+        <FileActions file={file} />
       </div>
     </div>
   );

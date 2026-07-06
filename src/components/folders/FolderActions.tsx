@@ -23,18 +23,31 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import type { Folder } from '@/types/dataroom';
+import { isFolderNameDuplicate } from '@/lib/validation';
+import { cn } from '@/lib/utils';
 
 interface FolderActionsProps {
-  id: string;
-  name: string;
+  folder: Folder;
 }
 
-export const FolderActions = ({ id, name }: FolderActionsProps) => {
-  const { deleteFolder, renameFolder } = useDataRoom();
+
+export const FolderActions = ({ folder }: FolderActionsProps) => {
+  const { id, name, parentId } = folder;
+
+  const { folders, deleteFolder, renameFolder } = useDataRoom();
 
   const [isRenameOpen, setIsRenameOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [newName, setNewName] = useState(name);
+  const trimmedName = newName.trim();
+
+  const error =
+    trimmedName.length === 0
+      ? 'Folder name is required.'
+      : isFolderNameDuplicate(folders, parentId, trimmedName, id)
+        ? 'A folder with this name already exists.'
+        : null;
 
   const handleRename = () => {
     const trimmedName = newName.trim();
@@ -83,9 +96,14 @@ export const FolderActions = ({ id, name }: FolderActionsProps) => {
           </DialogHeader>
 
           <div className='space-y-4'>
-            <Input value={newName} onChange={(e) => setNewName(e.target.value)} />
-
-            <Button className='w-full' onClick={handleRename}>
+            <Input
+              autoFocus
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              className={cn(error && 'border-red-500 focus-visible:ring-red-500')}
+            />
+            {error && <p className='mt-2 text-sm text-red-500'>{error}</p>}
+            <Button className='w-full' onClick={handleRename} disabled={!!error}>
               Save
             </Button>
           </div>

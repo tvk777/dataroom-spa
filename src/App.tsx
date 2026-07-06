@@ -33,8 +33,7 @@ function App() {
             {currentFolders.map((folder) => (
               <FolderCard
                 key={folder.id}
-                id={folder.id}
-                name={folder.name}
+                folder={folder}
                 onClick={() => navigateToFolder(folder.id)}
               />
             ))}

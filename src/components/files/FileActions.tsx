@@ -24,19 +24,31 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import type { FileItem } from '@/types/dataroom';
+import { isFileNameDuplicate } from '@/lib/validation';
+import { cn } from '@/lib/utils';
 
 interface FileActionsProps {
-  id: string;
-  name: string;
+  file: FileItem;
 }
 
-export const FileActions = ({ id, name }: FileActionsProps) => {
-  const { renameFile, deleteFile } = useDataRoom();
+export const FileActions = ({ file }: FileActionsProps) => {
+  const { id, name } = file;
+  const { files, renameFile, deleteFile } = useDataRoom();
 
   const [isRenameOpen, setIsRenameOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const [newName, setNewName] = useState(name);
+
+  const trimmedName = newName.trim();
+
+  const error =
+    trimmedName.length === 0
+      ? 'File name is required.'
+      : isFileNameDuplicate(files, file.folderId, trimmedName, file.id)
+        ? 'A file with this name already exists.'
+        : null;
 
   const handleRename = () => {
     const trimmedName = newName.trim();
@@ -86,9 +98,13 @@ export const FileActions = ({ id, name }: FileActionsProps) => {
           </DialogHeader>
 
           <div className='space-y-4'>
-            <Input value={newName} onChange={(e) => setNewName(e.target.value)} />
-
-            <Button className='w-full' onClick={handleRename}>
+            <Input
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              className={cn(error && 'border-red-500 focus-visible:ring-red-500')}
+            />
+            {error && <p className='mt-2 text-sm text-red-500'>{error}</p>}
+            <Button className='w-full' onClick={handleRename} disabled={!!error}>
               Save
             </Button>
           </div>
