@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { useDataRoom } from '@/context/DataRoomContext';
 
@@ -10,17 +11,26 @@ export const UploadFileButton = () => {
     inputRef.current?.click();
   };
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (!file) return;
 
-    if (file.type !== 'application/pdf') {
-      alert('Only PDF files are allowed.');
+    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+
+    if (!isPdf) {
+      toast.error('Only PDF files are allowed.');
+
+      event.target.value = '';
+
       return;
     }
 
-    await uploadFile(file);
+    const success = uploadFile(file);
+
+    if (!success) {
+      toast.error(`"${file.name}" already exists in this folder.`);
+    }
 
     event.target.value = '';
   };

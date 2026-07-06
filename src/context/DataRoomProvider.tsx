@@ -80,8 +80,9 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
     const trimmedName = file.name.trim();
 
     if (isFileNameDuplicate(files, currentFolderId, trimmedName)) {
-      return;
+      return false;
     }
+
     const newFile: FileItem = {
       id: crypto.randomUUID(),
       name: file.name,
@@ -92,6 +93,8 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
     };
 
     setFiles((prev) => [...prev, newFile]);
+
+    return true;
   };
 
   const renameFile = (id: string, newName: string) => {
