@@ -59,6 +59,16 @@ The application uses:
 
 ---
 
+## 💡 Architecture Decisions
+
+- Context API was chosen because the application has a relatively small global state and does not require a more complex state management library.
+
+- IndexedDB was selected instead of Local Storage because it can efficiently store File objects without converting them to Base64.
+
+- Business logic is separated from UI components to keep components focused on rendering.
+
+---
+
 ## 🚀 Getting Started
 
 Install dependencies
