@@ -8,6 +8,7 @@ Built with React, TypeScript, Tailwind CSS and IndexedDB.
 
 [DEMO LINK](https://dataroom-spa.vercel.app/)
 
+---
 
 ## ✨ Features
 
