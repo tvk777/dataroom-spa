@@ -1,75 +1,118 @@
-# React + TypeScript + Vite
+# 📂 Acme Data Room
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page application for managing folders and PDF documents.
 
-Currently, two official plugins are available:
+Built with React, TypeScript, Tailwind CSS and IndexedDB.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
 
-## React Compiler
+[DEMO LINK](https://dataroom-spa.vercel.app/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 📁 Create, rename and delete folders
+- 📂 Unlimited nested folders
+- 🧭 Breadcrumb navigation
+- 📄 Upload PDF documents
+- 👀 PDF preview in a new browser tab
+- ✏️ Rename and delete files
+- ✅ Validation for duplicate names
+- 🔔 Toast notifications
+- 💾 Persistent storage with IndexedDB
+- 📱 Responsive UI
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠 Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- Lucide React
+- IndexedDB (`idb`)
+- Sonner
 
+---
+
+## 🏗 Project Structure
+
+```text
+src/
+├── components/
+├── context/
+├── lib/
+├── services/
+├── types/
+├── App.tsx
+└── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The application uses:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Context API** for global state management.
+- **IndexedDB** for persistent local storage.
+- **Reusable UI components** with clear separation of concerns.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
+## 🚀 Getting Started
+
+Install dependencies
+
+```bash
+npm install
 ```
+
+Run the development server
+
+```bash
+npm run dev
+```
+
+Build the project
+
+```bash
+npm run build
+```
+
+Run ESLint
+
+```bash
+npm run lint
+```
+
+---
+
+## 💾 Data Storage
+
+All folders and files are stored locally using **IndexedDB**.
+
+No backend or external database is required.
+
+---
+
+## 📌 Notes
+
+- Only **PDF** files are supported.
+- Folder and file names must be unique within the same folder.
+- The application works completely offline after loading.
+
+---
+
+## 🔮 Possible Improvements
+
+Given more time, I would consider adding:
+
+- Drag & Drop upload
+- Search functionality
+- Sorting (name/date)
+- Multi-file upload
+- File thumbnails
+- Dark mode
+- Unit and integration tests
+
+
+
