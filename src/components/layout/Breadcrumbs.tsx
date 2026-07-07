@@ -8,7 +8,7 @@ export const Breadcrumbs = () => {
     <div className='mb-6 flex flex-wrap items-center gap-2 text-sm'>
       <button
         onClick={() => navigateToFolder(null)}
-        className='cursor-pointer flex items-center gap-1 text-slate-500 transition-colors hover:text-slate-900'
+        className='flex cursor-pointer items-center gap-1 text-slate-500 transition-colors hover:text-slate-900'
       >
         <House className='h-4 w-4' />
         <span>Data Room</span>

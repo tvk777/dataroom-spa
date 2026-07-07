@@ -36,7 +36,7 @@ function App() {
           <div className='rounded-xl border border-dashed bg-white py-20 text-center'>
             <p className='text-lg font-medium'>Empty Data Room</p>
 
-            <p className='text-slate-500'>Upload files or create folders</p>
+            <p className='text-muted-foreground'>Upload files or create folders</p>
           </div>
         ) : (
           <div className='grid gap-4 md:grid-cols-3 lg:grid-cols-4'>
