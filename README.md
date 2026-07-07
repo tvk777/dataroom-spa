@@ -6,7 +6,7 @@ Built with React, TypeScript, Tailwind CSS and IndexedDB.
 
 ## 🌐 Live Demo
 
-[DEMO LINK](https://dataroom-spa.vercel.app/)
+[DEMO LINK](https://dataroom-spa-eight.vercel.app/)
 
 ---
 
