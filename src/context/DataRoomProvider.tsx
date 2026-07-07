@@ -103,7 +103,7 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
     });
   };
 
-  const uploadFile = (file: File) => {
+  const uploadFile = (file: File): boolean => {
     const trimmedName = file.name.trim();
 
     if (isFileNameDuplicate(files, currentFolderId, trimmedName)) {
@@ -112,7 +112,7 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
 
     const newFile: FileItem = {
       id: crypto.randomUUID(),
-      name: file.name,
+      name: trimmedName,
       folderId: currentFolderId,
       file,
       size: file.size,
@@ -129,12 +129,16 @@ export const DataRoomProvider = ({ children }: DataRoomProviderProps) => {
 
     if (!trimmedName) return;
 
+    if (isFileNameDuplicate(files, currentFolderId, trimmedName)) {
+      return;
+    }
+
     setFiles((prev) =>
       prev.map((file) =>
         file.id === id
           ? {
               ...file,
-              name: newName,
+              name: trimmedName,
             }
           : file,
       ),

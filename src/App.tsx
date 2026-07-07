@@ -5,8 +5,8 @@ import { CreateFolderDialog } from '@/components/folders/CreateFolderDialog';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { UploadFileButton } from '@/components/files/UploadFileButton';
 import { FileCard } from '@/components/files/FileCard';
-import { openFile } from './lib/file-utils';
-import { LoadingScreen } from './components/layout/LoadingScreen';
+import { openFile } from '@/lib/file-utils';
+import { LoadingScreen } from '@/components/layout/LoadingScreen';
 
 function App() {
   const { currentFolders, currentFiles, navigateToFolder, isDataLoaded } = useDataRoom();
@@ -16,11 +16,11 @@ function App() {
   }
 
   return (
-    <div className='min-h-screen bg-slate-50 p-8'>      
+    <div className='min-h-screen bg-slate-50 p-8'>
       <div className='mx-auto max-w-6xl'>
         <div className='mb-8 flex items-center justify-between'>
           <div className='flex items-center gap-3'>
-            <FolderOpen className='h-8 w-8 text-blue-600' />
+            <FolderOpen className='h-8 w-8 text-primary' />
 
             <h1 className='text-3xl font-bold'>Acme Data Room</h1>
           </div>

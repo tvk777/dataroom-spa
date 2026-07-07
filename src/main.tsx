@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Toaster } from 'sonner';
 import './index.css';
 import App from './App.tsx';
-import { DataRoomProvider } from './context/DataRoomProvider.tsx';
+import { DataRoomProvider } from '@/context/DataRoomProvider.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
